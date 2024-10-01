@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,19 +17,18 @@ namespace JaydensApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.Run(new FormGameApp());
 
-            Greeting();
-            PlayGames();
-            Finish();
+            //Greeting();
+            //PlayGames();
+            //Finish();
         } // End of Main
 
         static public void Greeting()
         {
             string message = "Welcome ";
-            string name;
-            name = GetText("What is your name");
-            Console.WriteLine(message + name);
+            PlayersName = GetText("What is your name");
+            Console.WriteLine(message + PlayersName);
         }
 
         static public string GetText(string prompt)
@@ -195,6 +195,24 @@ namespace JaydensApp
 
             }
             catch (Exception ex)
+            {
+                feedback = "Not implemented correctly";
+            }
+            return feedback;
+        }
+
+        public static string PlayTwentySidedDiceGame()
+        {
+            string feedback = "";
+            try
+            {
+                TwentySidedDice playerDice = new TwentySidedDice("Blue");
+                TwentySidedDice computerDice = new TwentySidedDice("Red");
+                PlayersScore = playerDice.Num;
+                ComputerScore = computerDice.Num;
+                feedback = $"Player Rolled {playerDice}, computer rolled {computerDice} \nResult: ";
+                feedback += FindGameWinner();
+            } catch (Exception ex)
             {
                 feedback = "Not implemented correctly";
             }
