@@ -6,48 +6,13 @@ using System.Threading.Tasks;
 
 namespace JaydensApp
 {
-    internal class TwentySidedDice
-    {
-        protected string _Colour;
-        protected int _Num;
+    internal class TwentySidedDice : Dice
+    { 
 
-        public string Colour
-        {
-            get
-            {
-                return _Colour;
-            }
-            set
-            {
-                if ((value.Length > 0) && (value.Length <= 10))
-                {
-                    _Colour = value;
-                }
-                else
-                {
-                    throw new Exception("Bad colour: " + value);
-                }
-            }
-        }// End colour property
-
-        public virtual int Num
-        {
-            get { return _Num; } // Underscore represents a Read Only property
-        }// End Num property
-
-        // 3 Methods
-        protected static Random random = new Random();
-
-        public virtual void GenerateNumber()
+        public override void GenerateNumber()
         {
             _Num = random.Next(1, 20);
         }// End of Generte number Method
-
-        // 4 Override Methods
-        public override string ToString()
-        {
-            return _Colour + " " + _Num;
-        }// End of ToString Method
 
         // Object Constructor Methods
         public TwentySidedDice()
@@ -56,15 +21,8 @@ namespace JaydensApp
             _Colour = "Black";
         }// Creates a constructure with fixed values
 
-        public TwentySidedDice(string inColour, int inNum)
+        public TwentySidedDice(string inColour) : base(inColour)
         {
-            _Colour = inColour;
-            _Num = inNum;
-        }// Creates a constructor with randomised values
-
-        public TwentySidedDice(string inColour)
-        {
-            Colour = inColour;
             GenerateNumber();
         }// Creates a constructor with randomised values
     }

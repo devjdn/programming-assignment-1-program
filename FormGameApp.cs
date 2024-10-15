@@ -84,7 +84,7 @@ namespace JaydensApp
 
         private void FillCbxGame()
         {
-            String[] availableGames = { "Guessing Game", "Dice", "Ten Sided Dice, Twenty Sided Dice" };
+            String[] availableGames = { "Guessing Game", "Dice", "Ten Sided Dice", "Twenty Sided Dice" };
             CbxGame.Items.Clear();
             foreach (string game in availableGames)
                 CbxGame.Items.Add(game);
