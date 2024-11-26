@@ -226,7 +226,7 @@ namespace JaydensApp
             if(PlayersScore == ComputerScore)
             {
                 feedback = $"Draw as {PlayersScore} was equal to {ComputerScore}";
-                //Winner = "Draw";
+                Winner = "Draw";
             }
             else if (PlayersScore > ComputerScore)
             {

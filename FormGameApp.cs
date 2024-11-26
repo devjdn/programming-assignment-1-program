@@ -44,8 +44,8 @@ namespace JaydensApp
                         feedback = Program.PlayTwentySidedDiceGame(); break;
                     default:
                         MessageBox.Show("Game not implemented", "Error"); break;
-
                 }
+                MessageBox.Show(feedback, "Result");
             } catch (Exception ex)
             {
                 MessageBox.Show("Not implemented correctly" + ex.Message, "Exception Error");
@@ -70,7 +70,7 @@ namespace JaydensApp
 
         private void BtnFindOverallWinner_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            DisplayOverallGameWinner();
         }
 
         private void ResetInterface()
@@ -88,6 +88,39 @@ namespace JaydensApp
             CbxGame.Items.Clear();
             foreach (string game in availableGames)
                 CbxGame.Items.Add(game);
+        }
+
+        private void DisplayOverallGameWinner()
+        {
+            int playerWins = 0;
+            int computerWins = 0;
+            string result = "";
+            int numOfGames = LsvGameStatistics.Items.Count;
+
+            foreach(ListViewItem element in LsvGameStatistics.Items)
+            {
+                result = element.SubItems[3].Text;
+                if (result.StartsWith(Program.PlayersName))
+                    playerWins += 1;
+                else if (result.StartsWith("Computer"))
+                    computerWins += 1;
+            }
+            if (playerWins > computerWins)
+                result = $"{Program.PlayersName} wins as they can {playerWins} games, which is higher than the computer's number of wins.";
+            else if (playerWins < computerWins)
+                result = $"Computer wins  as they won {computerWins}, which is higher than {Program.PlayersName}'s number of wins";
+            if (playerWins == computerWins)
+                result = $"Draw, as both players won {computerWins} each";
+
+            MessageBox.Show(result, "Overall result");
+        }
+
+        private void DisplayGameResult(string gameName, string feedback)
+        {
+            string[] row = { Game_Name, Program.PlayersScore.ToString(), Program.ComputerScore.ToString(), Program.Winner };
+            var listViewItem = new ListViewItem(row);
+            LsvGameStatistics.Items.Add(listViewItem);
+            MessageBox.Show(feedback, $"{gameName} Result");
         }
 
         private void Form1_Load(object sender, EventArgs e)
