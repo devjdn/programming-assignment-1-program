@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Deck.cs" />
     <Compile Include="TwentySidedDice.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="FormGameApp.cs">

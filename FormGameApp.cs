@@ -42,10 +42,12 @@ namespace JaydensApp
                         feedback = Program.PlayTenSidedDiceGame(); break;
                     case "Twenty Sided Dice":
                         feedback = Program.PlayTwentySidedDiceGame(); break;
+                    case "High Card Wins":
+                        feedback = Program.PlayHighCardWins() break;
                     default:
                         MessageBox.Show("Game not implemented", "Error"); break;
                 }
-                MessageBox.Show(feedback, "Result");
+                DisplayGameResult(Game_Name, feedback);
             } catch (Exception ex)
             {
                 MessageBox.Show("Not implemented correctly" + ex.Message, "Exception Error");
