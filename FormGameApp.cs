@@ -34,8 +34,6 @@ namespace JaydensApp
             {
                 switch (Game_Name)
                 {
-                    case "Guessing Game":
-                        feedback = Program.PlayGuessingGameV2(); break;
                     case "Dice":
                         feedback = Program.PlayDiceGame(); break;
                     case "Ten Sided Dice": 
@@ -43,7 +41,7 @@ namespace JaydensApp
                     case "Twenty Sided Dice":
                         feedback = Program.PlayTwentySidedDiceGame(); break;
                     case "High Card Wins":
-                        feedback = Program.PlayHighCardWins() break;
+                        feedback = PlayHighCardWins(); break;
                     default:
                         MessageBox.Show("Game not implemented", "Error"); break;
                 }
@@ -83,10 +81,13 @@ namespace JaydensApp
             BtnPlayGame.Enabled = false;
             LsvGameStatistics.Items.Clear();
         }
-
+        /// <summary>
+        /// FillCbxGame combo-box with availableGames from String array
+        /// a.) Declare 
+        /// </summary>
         private void FillCbxGame()
         {
-            String[] availableGames = { "Guessing Game", "Dice", "Ten Sided Dice", "Twenty Sided Dice" };
+            String[] availableGames = { "Dice", "Ten Sided Dice", "Twenty Sided Dice", "High Card Wins", "Black Jack" };
             CbxGame.Items.Clear();
             foreach (string game in availableGames)
                 CbxGame.Items.Add(game);
@@ -125,6 +126,7 @@ namespace JaydensApp
             MessageBox.Show(feedback, $"{gameName} Result");
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             FillCbxGame();
@@ -135,5 +137,41 @@ namespace JaydensApp
             this.TbxPlayersName.TextChanged += new System.EventHandler(this.TbxPlayersName_TextChanged);
             this.CbxGame.SelectedIndexChanged += new System.EventHandler(CbxGame_SelectedIndexChanged);
         }
-    }
+
+        // Playing Card Games
+        Deck mainDeck = null;
+
+        private string PlayHighCardWins()
+        {
+            if (mainDeck == null) mainDeck = new Deck();
+
+            PlayingCard playerCard = mainDeck.Deal();
+            Program.PlayersScore = playerCard.Value;
+            LblPlayerScore.Text = Program.PlayersScore.ToString();
+            PlayingCard computerCard = mainDeck.Deal();
+            Program.ComputerScore = computerCard.Value;
+            LblComputerScore.Text = Program.ComputerScore.ToString();
+
+            return Program.FindGameWinner();
+        }
+
+       
+
+
+        // ignore
+        private void LblPlayerScore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblComputerScore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LsvGameStatistics_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    } // end of form
 }

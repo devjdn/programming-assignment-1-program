@@ -219,16 +219,12 @@ namespace JaydensApp
             return feedback;
         }
 
-        public static string PlayHighCardWins()
-        {
-            return null;
-        }
 
         public static string FindGameWinner()
         {
             string feedback = "";
 
-            if(PlayersScore == ComputerScore)
+            if (PlayersScore == ComputerScore)
             {
                 feedback = $"Draw as {PlayersScore} was equal to {ComputerScore}";
                 Winner = "Draw";
