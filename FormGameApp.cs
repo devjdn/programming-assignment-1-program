@@ -155,7 +155,27 @@ namespace JaydensApp
             return Program.FindGameWinner();
         }
 
-       
+        // Blackjack
+        Hand ComputerHand = null;
+        Hand PlayerHand = null;
+
+        public void DealPlayerCard()
+        {
+            if(mainDeck == null)
+                mainDeck = new Deck();
+            if(PlayerHand == null)
+                PlayerHand = new Hand();
+
+            PlayingCard playerCard = mainDeck.Deal();
+            PlayerHand.AddCardToHand(playerCard);
+            DisplayPlayerCard(playerCard);
+        }
+
+        private void DisplayPlayerCard(PlayingCard playerCard)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         // ignore

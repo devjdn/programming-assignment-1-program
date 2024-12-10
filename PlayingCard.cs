@@ -49,5 +49,10 @@ namespace JaydensApp
                     Value = 10; break;
             }
         } // End of PlayingCard constructor method
+
+        public override string ToString()
+        {
+            return $"Suit {Suit}, Face {Face}, Value {Value}";
+        }
     }
 }
