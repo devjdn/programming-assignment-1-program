@@ -157,7 +157,7 @@ namespace JaydensApp
             return choice;
         }
 
-        static string feedback = "";
+        //static string feedback = "";
         public static string PlayersName = "";
         public static int PlayersScore = 0;
         public static int ComputerScore = 0;

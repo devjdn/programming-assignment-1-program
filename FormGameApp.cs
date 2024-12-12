@@ -171,9 +171,26 @@ namespace JaydensApp
             DisplayPlayerCard(playerCard);
         }
 
-        private void DisplayPlayerCard(PlayingCard playerCard)
+        private void DisplayPlayerCard(PlayingCard card)
         {
-            throw new NotImplementedException();
+            try
+            {
+                LsvPlayerHand.Items.Add(new ListViewItem(new[] { card.Face.ToString(), card.Suit.ToString() }));
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Display card error");
+            }
+        }
+
+        public string PlayBlackjackGame()
+        {
+            DealPlayerCard();
+            DealPlayerCard();
+
+            Program.PlayersScore = PlayerHand.GetHandValue();
+            LblPlayerScore.Text = PlayerScore.ToString();
+
+            return "Select Hit or Stand";
         }
 
 

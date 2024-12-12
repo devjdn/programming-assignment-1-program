@@ -55,7 +55,8 @@ namespace JaydensApp
 
             while((handValue > 21) && (aceCount > 0))
             {
-                
+                aceCount--;
+                cardValue = 1;
             }
 
             return handValue;
