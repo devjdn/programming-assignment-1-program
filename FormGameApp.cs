@@ -25,7 +25,7 @@ namespace JaydensApp
             Program.PlayersName = TbxPlayersName.Text.TrimEnd();
             Game_Name = CbxGame.SelectedItem.ToString();
             PlayGame(Game_Name);
-        }
+        } // End of BtnPlayGame_click
 
         public void PlayGame(string Game_Name)
         {
@@ -42,6 +42,8 @@ namespace JaydensApp
                         feedback = Program.PlayTwentySidedDiceGame(); break;
                     case "High Card Wins":
                         feedback = PlayHighCardWins(); break;
+                    case "Blackjack":
+                        feedback = PlayBlackjackGame(); break;
                     default:
                         MessageBox.Show("Game not implemented", "Error"); break;
                 }
@@ -50,7 +52,7 @@ namespace JaydensApp
             {
                 MessageBox.Show("Not implemented correctly" + ex.Message, "Exception Error");
             }
-        }
+        } // End of PlayGame
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -60,18 +62,18 @@ namespace JaydensApp
         {
             if(TbxPlayersName.Text.Length > 1)
                 CbxGame.Enabled = true;
-        }
-        
+        } // End of  TbxPlayersName_TextChanged
+
         private void CbxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CbxGame.SelectedIndex != -1)
                 BtnPlayGame.Enabled = true;
-        }
+        } // End of CbxGame_SelectedIndexChanged
 
         private void BtnFindOverallWinner_Click(object sender, EventArgs e)
         {
             DisplayOverallGameWinner();
-        }
+        } // End of BtnFindOverallWinner_Click
 
         private void ResetInterface()
         {
@@ -80,18 +82,20 @@ namespace JaydensApp
             CbxGame.Enabled = false;
             BtnPlayGame.Enabled = false;
             LsvGameStatistics.Items.Clear();
-        }
+        } // End of ResetInterface
+
+
         /// <summary>
         /// FillCbxGame combo-box with availableGames from String array
         /// a.) Declare 
         /// </summary>
         private void FillCbxGame()
         {
-            String[] availableGames = { "Dice", "Ten Sided Dice", "Twenty Sided Dice", "High Card Wins", "Black Jack" };
+            String[] availableGames = { "Dice", "Ten Sided Dice", "Twenty Sided Dice", "High Card Wins", "Blackjack" };
             CbxGame.Items.Clear();
             foreach (string game in availableGames)
                 CbxGame.Items.Add(game);
-        }
+        } // End of FillCbxGame
 
         private void DisplayOverallGameWinner()
         {
@@ -116,15 +120,22 @@ namespace JaydensApp
                 result = $"Draw, as both players won {computerWins} each";
 
             MessageBox.Show(result, "Overall result");
-        }
+        } //  End of DIsplayOverallGameWinner
 
         private void DisplayGameResult(string gameName, string feedback)
         {
-            string[] row = { Game_Name, Program.PlayersScore.ToString(), Program.ComputerScore.ToString(), Program.Winner };
-            var listViewItem = new ListViewItem(row);
-            LsvGameStatistics.Items.Add(listViewItem);
-            MessageBox.Show(feedback, $"{gameName} Result");
-        }
+            if (gameName != "Blackjack")
+            {
+                string[] row = { Game_Name, Program.PlayersScore.ToString(), Program.ComputerScore.ToString(), Program.Winner };
+                var listViewItem = new ListViewItem(row);
+                LsvGameStatistics.Items.Add(listViewItem);
+                MessageBox.Show(feedback, $"{gameName} Result");
+            }
+            else
+            {
+                MessageBox.Show(feedback, $"{gameName} Next step");
+            }
+        } // End of DisplayGameResult
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -159,6 +170,18 @@ namespace JaydensApp
         Hand ComputerHand = null;
         Hand PlayerHand = null;
 
+
+        /// <summary>
+        /// This function deals a player a card from the deck.
+        /// If the mainDeck is null, it creates a new deck from the Deck class.
+        /// If the PlayerHand is null, it creates a new hand from the Hand class.
+        /// Following this, the playerCard is initialized with cards from the mainDeck,
+        /// using the Deal method.
+        /// These cards are then added to the hand of the player using the AddCardToHand method,
+        /// using the playerCard as the argument.
+        /// The player card is then displayed on the interface,
+        /// once again using the playerCard as the argument.
+        /// </summary>
         public void DealPlayerCard()
         {
             if(mainDeck == null)
@@ -169,7 +192,19 @@ namespace JaydensApp
             PlayingCard playerCard = mainDeck.Deal();
             PlayerHand.AddCardToHand(playerCard);
             DisplayPlayerCard(playerCard);
-        }
+        } // End of DealPlayerCard
+
+        public void DealComputerCard()
+        {
+            if (mainDeck == null)
+                mainDeck = new Deck();
+            if (ComputerHand == null)
+                ComputerHand = new Hand();
+
+            PlayingCard computerCard = mainDeck.Deal();
+            ComputerHand.AddCardToHand(computerCard);
+            DisplayPlayerCard(computerCard);
+        } // End of DealComputerCard
 
         private void DisplayPlayerCard(PlayingCard card)
         {
@@ -182,18 +217,51 @@ namespace JaydensApp
             }
         }
 
+
+        /// <summary>
+        /// This function deals deals both players a card,
+        /// then sets their scores to the value of their hand
+        /// using the GetHandValue method.
+        /// </summary>
+        /// <returns></returns>
         public string PlayBlackjackGame()
         {
             DealPlayerCard();
             DealPlayerCard();
+            DealComputerCard();
+            DealComputerCard();
 
             Program.PlayersScore = PlayerHand.GetHandValue();
             LblPlayerScore.Text = PlayerScore.ToString();
+            Program.ComputerScore = ComputerHand.GetHandValue();
+            LblComputerScore.Text = ComputerScore.ToString();
 
             return "Select Hit or Stand";
         }
 
+        private void BtnHit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DealPlayerCard();
+                Program.PlayersScore = PlayerHand.GetHandValue();
+                LblPlayerScore.Text = PlayerScore.ToString();
 
+                if(Program.PlayersScore > 21)
+                {
+                    BtnStand_Click(sender, new EventArgs());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Display BtnHit Error");
+            }
+        }
+
+        private void BtnStand_Click(object sender, EventArgs e)
+        {
+
+        }
 
         // ignore
         private void LblPlayerScore_Click(object sender, EventArgs e)
@@ -210,5 +278,7 @@ namespace JaydensApp
         {
 
         }
+
+        
     } // end of form
 }

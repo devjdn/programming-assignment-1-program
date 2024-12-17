@@ -45,17 +45,17 @@
             this.Winner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.BtnHit = new System.Windows.Forms.Button();
-            this.BtnStand = new System.Windows.Forms.Button();
-            this.LsvPlayerHand = new System.Windows.Forms.ListView();
-            this.columnHeader0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.LsvComputerHand = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.LsvPlayerHand = new System.Windows.Forms.ListView();
+            this.columnHeader0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.BtnStand = new System.Windows.Forms.Button();
+            this.BtnHit = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -230,61 +230,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BlackJack";
             // 
-            // groupBox2
+            // label7
             // 
-            this.groupBox2.Controls.Add(this.LsvGameStatistics);
-            this.groupBox2.Controls.Add(this.BtnFindOverallWinner);
-            this.groupBox2.Location = new System.Drawing.Point(12, 413);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(774, 230);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Game Results";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(531, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Computer\'s hand";
             // 
-            // BtnHit
+            // label6
             // 
-            this.BtnHit.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnHit.Location = new System.Drawing.Point(24, 49);
-            this.BtnHit.Name = "BtnHit";
-            this.BtnHit.Size = new System.Drawing.Size(97, 36);
-            this.BtnHit.TabIndex = 0;
-            this.BtnHit.Text = "Hit";
-            this.BtnHit.UseVisualStyleBackColor = true;
-            // 
-            // BtnStand
-            // 
-            this.BtnStand.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnStand.Location = new System.Drawing.Point(24, 135);
-            this.BtnStand.Name = "BtnStand";
-            this.BtnStand.Size = new System.Drawing.Size(97, 36);
-            this.BtnStand.TabIndex = 1;
-            this.BtnStand.Text = "Stand";
-            this.BtnStand.UseVisualStyleBackColor = true;
-            // 
-            // LsvPlayerHand
-            // 
-            this.LsvPlayerHand.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader0,
-            this.columnHeader1});
-            this.LsvPlayerHand.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LsvPlayerHand.GridLines = true;
-            this.LsvPlayerHand.HideSelection = false;
-            this.LsvPlayerHand.Location = new System.Drawing.Point(209, 36);
-            this.LsvPlayerHand.Name = "LsvPlayerHand";
-            this.LsvPlayerHand.Size = new System.Drawing.Size(205, 154);
-            this.LsvPlayerHand.TabIndex = 2;
-            this.LsvPlayerHand.UseCompatibleStateImageBehavior = false;
-            this.LsvPlayerHand.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader0
-            // 
-            this.columnHeader0.Text = "Face";
-            this.columnHeader0.Width = 100;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Suit";
-            this.columnHeader1.Width = 100;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(209, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Player\'s hand";
             // 
             // LsvComputerHand
             // 
@@ -311,23 +273,63 @@
             this.columnHeader3.Text = "Suit";
             this.columnHeader3.Width = 100;
             // 
-            // label6
+            // LsvPlayerHand
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Player\'s hand";
+            this.LsvPlayerHand.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader0,
+            this.columnHeader1});
+            this.LsvPlayerHand.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LsvPlayerHand.GridLines = true;
+            this.LsvPlayerHand.HideSelection = false;
+            this.LsvPlayerHand.Location = new System.Drawing.Point(209, 36);
+            this.LsvPlayerHand.Name = "LsvPlayerHand";
+            this.LsvPlayerHand.Size = new System.Drawing.Size(205, 154);
+            this.LsvPlayerHand.TabIndex = 2;
+            this.LsvPlayerHand.UseCompatibleStateImageBehavior = false;
+            this.LsvPlayerHand.View = System.Windows.Forms.View.Details;
             // 
-            // label7
+            // columnHeader0
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(531, 20);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(86, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Computer\'s hand";
+            this.columnHeader0.Text = "Face";
+            this.columnHeader0.Width = 100;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Suit";
+            this.columnHeader1.Width = 100;
+            // 
+            // BtnStand
+            // 
+            this.BtnStand.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStand.Location = new System.Drawing.Point(24, 135);
+            this.BtnStand.Name = "BtnStand";
+            this.BtnStand.Size = new System.Drawing.Size(97, 36);
+            this.BtnStand.TabIndex = 1;
+            this.BtnStand.Text = "Stand";
+            this.BtnStand.UseVisualStyleBackColor = true;
+            this.BtnStand.Click += new System.EventHandler(this.BtnStand_Click);
+            // 
+            // BtnHit
+            // 
+            this.BtnHit.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnHit.Location = new System.Drawing.Point(24, 49);
+            this.BtnHit.Name = "BtnHit";
+            this.BtnHit.Size = new System.Drawing.Size(97, 36);
+            this.BtnHit.TabIndex = 0;
+            this.BtnHit.Text = "Hit";
+            this.BtnHit.UseVisualStyleBackColor = true;
+            this.BtnHit.Click += new System.EventHandler(this.BtnHit_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.LsvGameStatistics);
+            this.groupBox2.Controls.Add(this.BtnFindOverallWinner);
+            this.groupBox2.Location = new System.Drawing.Point(12, 413);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(774, 230);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Game Results";
             // 
             // label8
             // 

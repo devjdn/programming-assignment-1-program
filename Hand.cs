@@ -49,7 +49,10 @@ namespace JaydensApp
                     cardValue = 11;
                     aceCount++;
                 }
+                else
+                {
 
+                }
                 handValue = handValue + cardValue;
             }
 
@@ -61,5 +64,6 @@ namespace JaydensApp
 
             return handValue;
         } // End of GetHandValue method
+        // cardValue = _Cards[ptr].Value
     }
 }
