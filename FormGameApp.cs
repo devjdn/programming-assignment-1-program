@@ -263,6 +263,20 @@ namespace JaydensApp
 
         }
 
+        private string FindBlackJackGameWinner()
+        {
+            string feedback = "";
+
+            if (Program.PlayersScore > Program.ComputerScore)
+                feedback = $"{Program.PlayersName} wins as {Program.PlayersScore} is higher than {Program.ComputerScore}";
+            else if (Program.PlayersScore < Program.ComputerScore)
+                feedback = $"Computer wins as {Program.ComputerScore} is higher than {Program.PlayersScore}";
+            else if (Program.PlayersScore == Program.ComputerScore)
+                feedback = $"Draw as both players achieved an equal score.";
+
+            return feedback;
+        }
+
         // ignore
         private void LblPlayerScore_Click(object sender, EventArgs e)
         {
