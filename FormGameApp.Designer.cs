@@ -176,6 +176,7 @@
             this.LsvGameStatistics.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LsvGameStatistics.GridLines = true;
             this.LsvGameStatistics.HideSelection = false;
+            this.LsvGameStatistics.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.LsvGameStatistics.Location = new System.Drawing.Point(6, 19);
             this.LsvGameStatistics.Name = "LsvGameStatistics";
             this.LsvGameStatistics.Scrollable = false;

@@ -143,7 +143,7 @@ namespace JaydensApp
             FillCbxGame();
             ResetInterface();
 
-            this.BtnPlayGame.Click += new System.EventHandler(this.BtnPlayGame_Click);
+            //this.BtnPlayGame.Click += new System.EventHandler(this.BtnPlayGame_Click);
             this.BtnFindOverallWinner.Click += new System.EventHandler(this.BtnFindOverallWinner_Click);
             this.TbxPlayersName.TextChanged += new System.EventHandler(this.TbxPlayersName_TextChanged);
             this.CbxGame.SelectedIndexChanged += new System.EventHandler(CbxGame_SelectedIndexChanged);
@@ -232,9 +232,9 @@ namespace JaydensApp
             DealComputerCard();
 
             Program.PlayersScore = PlayerHand.GetHandValue();
-            LblPlayerScore.Text = PlayerScore.ToString();
+            LblPlayerScore.Text = Program.PlayersScore.ToString();
             Program.ComputerScore = ComputerHand.GetHandValue();
-            LblComputerScore.Text = ComputerScore.ToString();
+            LblComputerScore.Text = Program.ComputerScore.ToString();
 
             return "Select Hit or Stand";
         }
@@ -245,7 +245,7 @@ namespace JaydensApp
             {
                 DealPlayerCard();
                 Program.PlayersScore = PlayerHand.GetHandValue();
-                LblPlayerScore.Text = PlayerScore.ToString();
+                LblPlayerScore.Text = Program.PlayersScore.ToString();
 
                 if(Program.PlayersScore > 21)
                 {
