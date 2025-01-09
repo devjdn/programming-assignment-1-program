@@ -20,6 +20,11 @@ namespace JaydensApp
         // Global variables
         public string Game_Name = "";
 
+        /// <summary>
+        /// Plays the game that the user chooses
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPlayGame_Click(object sender, EventArgs e)
         {
             Program.PlayersName = TbxPlayersName.Text.TrimEnd();
@@ -27,6 +32,10 @@ namespace JaydensApp
             PlayGame(Game_Name);
         } // End of BtnPlayGame_click
 
+        /// <summary>
+        /// Runs code to play a specific game depending on what the user chooses
+        /// </summary>
+        /// <param name="Game_Name"></param>
         public void PlayGame(string Game_Name)
         {
             string feedback = "";
@@ -70,11 +79,19 @@ namespace JaydensApp
                 BtnPlayGame.Enabled = true;
         } // End of CbxGame_SelectedIndexChanged
 
+        /// <summary>
+        /// Runs the DisplayOverallGameWinner method which calculates the player with the most wins
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnFindOverallWinner_Click(object sender, EventArgs e)
         {
             DisplayOverallGameWinner();
         } // End of BtnFindOverallWinner_Click
 
+        /// <summary>
+        /// Resets and clears any information in the game selection combo box
+        /// </summary>
         private void ResetInterface()
         {
             TbxPlayersName.Text = "";
@@ -86,8 +103,7 @@ namespace JaydensApp
 
 
         /// <summary>
-        /// FillCbxGame combo-box with availableGames from String array
-        /// a.) Declare 
+        /// Fills the dropdown menu (combo box) with a list of the available games that are playable to the user
         /// </summary>
         private void FillCbxGame()
         {
@@ -97,6 +113,10 @@ namespace JaydensApp
                 CbxGame.Items.Add(game);
         } // End of FillCbxGame
 
+        /// <summary>
+        /// Calculates who won the most games and displays it is a message box pop up window.
+        /// If a draw occurs, that is also specified.
+        /// </summary>
         private void DisplayOverallGameWinner()
         {
             int playerWins = 0;
@@ -122,6 +142,11 @@ namespace JaydensApp
             MessageBox.Show(result, "Overall result");
         } //  End of DIsplayOverallGameWinner
 
+        /// <summary>
+        /// Shows the game results, who won and what the score was, in a list view
+        /// </summary>
+        /// <param name="gameName"></param>
+        /// <param name="feedback"></param>
         private void DisplayGameResult(string gameName, string feedback)
         {
             if (gameName != "Blackjack")
@@ -152,6 +177,12 @@ namespace JaydensApp
         // Playing Card Games
         Deck mainDeck = null;
 
+        /// <summary>
+        /// Plays the high card wins game
+        /// Creates a new deck from the Deck constructor if the mainDeck variable is null
+        /// Assigns the scores of both the player and the computer to their respective score labels
+        /// </summary>
+        /// <returns></returns>
         private string PlayHighCardWins()
         {
             if (mainDeck == null) mainDeck = new Deck();
@@ -194,6 +225,9 @@ namespace JaydensApp
             DisplayPlayerCard(playerCard);
         } // End of DealPlayerCard
 
+        /// <summary>
+        /// Deals the computer a card and adds it to the computer's hand
+        /// </summary>
         public void DealComputerCard()
         {
             if (mainDeck == null)
@@ -203,9 +237,13 @@ namespace JaydensApp
 
             PlayingCard computerCard = mainDeck.Deal();
             ComputerHand.AddCardToHand(computerCard);
-            DisplayPlayerCard(computerCard);
+            DisplayComputerCard(computerCard);
         } // End of DealComputerCard
 
+        /// <summary>
+        /// Shows the player's card face and suit in the player hand list view
+        /// </summary>
+        /// <param name="card"></param>
         private void DisplayPlayerCard(PlayingCard card)
         {
             try
@@ -215,6 +253,34 @@ namespace JaydensApp
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Display card error");
             }
+        }
+
+        /// <summary>
+        /// Shows the computer's card face and suit in the computer hand list view
+        /// </summary>
+        /// <param name="card"></param>
+        private void DisplayComputerCard(PlayingCard card)
+        {
+            try
+            {
+                LsvComputerHand.Items.Add(new ListViewItem(new[] { card.Face.ToString(), card.Suit.ToString() }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Display card error");
+            }
+        }
+
+        /// <summary>
+        /// Deals the computer 2 cards and shows the score in the computer score label
+        /// </summary>
+        private void DealaComputerHand()
+        {
+            DealComputerCard();
+            DealComputerCard();
+
+            Program.ComputerScore = ComputerHand.GetHandValue();
+            LblComputerScore.Text = Program.ComputerScore.ToString();
         }
 
 
@@ -228,17 +294,19 @@ namespace JaydensApp
         {
             DealPlayerCard();
             DealPlayerCard();
-            DealComputerCard();
-            DealComputerCard();
 
             Program.PlayersScore = PlayerHand.GetHandValue();
             LblPlayerScore.Text = Program.PlayersScore.ToString();
-            Program.ComputerScore = ComputerHand.GetHandValue();
-            LblComputerScore.Text = Program.ComputerScore.ToString();
+            //Program.ComputerScore = ComputerHand.GetHandValue();
+            //LblComputerScore.Text = Program.ComputerScore.ToString();
 
             return "Select Hit or Stand";
         }
-
+        /// <summary>
+        /// Deals a 3rd card to the player
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnHit_Click(object sender, EventArgs e)
         {
             try
@@ -249,7 +317,7 @@ namespace JaydensApp
 
                 if(Program.PlayersScore > 21)
                 {
-                    BtnStand_Click(sender, new EventArgs());
+                    BtnStand_Click(sender, e);
                 }
             }
             catch (Exception ex)
@@ -257,12 +325,43 @@ namespace JaydensApp
                 MessageBox.Show(ex.Message, "Display BtnHit Error");
             }
         }
-
+        /// <summary>
+        /// Deals a hand to the computer depending on the current score
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnStand_Click(object sender, EventArgs e)
         {
+            try
+            {
+                DealaComputerHand();
 
+                Program.ComputerScore = PlayerHand.GetHandValue();
+                LblComputerScore.Text = Program.ComputerScore.ToString();
+
+                while(Program.ComputerScore < 17)
+                {
+                    DealaComputerHand();
+                    Program.ComputerScore = PlayerHand.GetHandValue();
+                    LblComputerScore.Text = Program.ComputerScore.ToString();
+                }
+
+                if (Program.ComputerScore >= 17)
+                {
+                    string feedback = FindBlackJackGameWinner();
+                    DisplayGameResult("Blackjack", feedback);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error with stand");
+            }
         }
 
+        /// <summary>
+        /// Calculates who won the Blackjack game by comparing the scores of the two players
+        /// </summary>
+        /// <returns></returns>
         private string FindBlackJackGameWinner()
         {
             string feedback = "";

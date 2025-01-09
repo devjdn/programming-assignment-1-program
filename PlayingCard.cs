@@ -29,24 +29,45 @@ namespace JaydensApp
         {
             Suit = inSuit;
             Face = inFace;
+
             switch (inFace)
             {
-                case "Ace": Value = 14; break;
-                case "Two": Value = 2; break;
-                case "Three": Value = 3; break;
-                case "Four": Value = 4; break;
-                case "Five": Value = 5; break;
-                case "Six": Value = 6; break;
-                case "Seven": Value = 7; break;
-                case "Eight": Value = 8; break;
-                case "Nine": Value = 9; break;
-                case "Ten": Value = 10; break;
-                case "Jack": Value = 11; break;
-                case "Queen": Value = 12; break;
-                case "King": Value = 13; break;
+                case "Ace":
+                    Value = 11; // Default to 11 for Blackjack; adjust dynamically based on hand value later.
+                    break;
+                case "Two":
+                    Value = 2;
+                    break;
+                case "Three":
+                    Value = 3;
+                    break;
+                case "Four":
+                    Value = 4;
+                    break;
+                case "Five":
+                    Value = 5;
+                    break;
+                case "Six":
+                    Value = 6;
+                    break;
+                case "Seven":
+                    Value = 7;
+                    break;
+                case "Eight":
+                    Value = 8;
+                    break;
+                case "Nine":
+                    Value = 9;
+                    break;
+                case "Ten":
+                case "Jack":
+                case "Queen":
+                case "King":
+                    Value = 10; // Face cards all have a value of 10 in Blackjack.
+                    break;
 
-                default: 
-                    Value = 10; break;
+                default:
+                    throw new ArgumentException("Invalid card face value.");
             }
         } // End of PlayingCard constructor method
 
